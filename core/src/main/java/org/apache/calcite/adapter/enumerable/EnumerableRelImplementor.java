@@ -206,6 +206,20 @@ public class EnumerableRelImplementor extends JavaRelImplementor {
 
     // Constructor:
     //   Foo(T0 f0, ...) { this.f0 = f0; ... }
+    final BlockBuilder ctorBlockBuilder = new BlockBuilder();
+    final List<ParameterExpression> ctorParameters = new ArrayList<>();
+    for (Types.RecordField field : type.getRecordFields()) {
+      ctorParameters.add(
+              Expressions.parameter(
+                  field.getType(), field.getName()));
+    }
+    classDeclaration.memberDeclarations.add(
+        Expressions.constructorDecl(
+            Modifier.PUBLIC,
+            type,
+            ctorParameters,
+            ctorBlockBuilder.toBlock()));
+
     final BlockBuilder blockBuilder = new BlockBuilder();
     final List<ParameterExpression> parameters = new ArrayList<>();
     final ParameterExpression thisParameter =
@@ -219,6 +233,8 @@ public class EnumerableRelImplementor extends JavaRelImplementor {
             type,
             parameters,
             blockBuilder.toBlock()));
+
+
 
     // equals method():
     //   public boolean equals(Object o) {

@@ -119,7 +119,7 @@ public class EnumerableCalc extends Calc implements EnumerableRel {
 
     final PhysType physType =
         PhysTypeImpl.of(
-            typeFactory, getRowType(), pref.prefer(result.format));
+            typeFactory, getRowType(), pref.prefer(result.format), false);
 
     // final Enumerable<Employee> inputEnumerable = <<child adapter>>;
     // return new Enumerable<IntString>() {

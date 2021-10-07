@@ -149,7 +149,8 @@ public abstract class Types {
       TypeVariable typeVariable = (TypeVariable) type;
       return toClass(typeVariable.getBounds()[0]);
     }
-    throw new RuntimeException("unsupported type " + type); // TODO:
+    return Object.class;
+//    throw new RuntimeException("unsupported type " + type); // TODO:
   }
 
   static Class[] toClassArray(Collection<Type> types) {
